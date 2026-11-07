@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>BUFF → Steam check: settings</title>
+<style>
+  body { font: 14px/1.5 system-ui, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 16px; color: #1f2328; }
+  label { display: block; margin: 12px 0 2px; font-weight: 600; }
+  .h { color: #59636e; font-size: 12px; font-weight: 400; }
+  input, select { padding: 5px; font: inherit; width: 220px; }
+  button { margin-top: 16px; padding: 6px 14px; font: inherit; }
+  #saved { color: #1a7f37; margin-left: 8px; }
+  .box { background: #fff8c5; border: 1px solid #d4a72c; padding: 8px 12px; border-radius: 6px; font-size: 13px; }
+</style>
+</head>
+<body>
+<h1>BUFF → Steam wallet-value check</h1>
+<p class="box">Read-only research aid. Prices come from Steam's undocumented public price endpoint (no login, no cookies), called only when you hover an item, cached and rate-limited. BUFF figures are the card's lowest listing price plus the fees you enter below — not the checkout total. Steam Wallet credit is not cash.</p>
+
+<h2 style="font-size:16px">Where it works</h2>
+<ul style="font-size:13px">
+  <li><b>Use Market → All Items</b>: card price = cheapest sell listing (verified).</li>
+  <li>Best Deals / Popular: card shows one specific listing, maybe not the cheapest; the popup warns.</li>
+  <li>Recent Buy Orders, Sticker Combos, Gold Stickers: <b>not supported</b> (buy orders / sticker premiums); the popup won't compare.</li>
+  <li>Item detail pages and 2014 Katowice: no popup.</li>
+</ul>
+
+<label>Steam wallet currency <span class="h">— Steam prices are fetched in this currency; BUFF prices are converted with ECB reference rates</span></label>
+<select id="walletCurrency"><option>USD</option><option>EUR</option><option>GBP</option></select>
+
+<label>BUFF payment fee (%) <span class="h">— e.g. card/top-up fee; leave 0 if already included in the price</span></label>
+<input id="buffFeePct" type="number" min="0" max="50" step="0.01" />
+
+<label>BUFF fixed fee per purchase (in wallet currency)</label>
+<input id="buffFixedFee" type="number" min="0" step="0.01" />
+
+<label>FX markup over ECB rate (%) <span class="h">— only applied when BUFF currency ≠ wallet currency</span></label>
+<input id="fxMarkupPct" type="number" min="0" max="20" step="0.01" />
+
+<label>Undercut Steam lowest ask by (cents)</label>
+<input id="undercutTicks" type="number" min="0" max="1000" step="1" />
+
+<label>Hover delay before lookup (ms)</label>
+<input id="hoverDelayMs" type="number" min="200" max="3000" step="50" />
+
+<label>Cache Steam prices for (minutes)</label>
+<input id="cacheMinutes" type="number" min="1" max="120" step="1" />
+
+<label>Max Steam lookups per minute <span class="h">— community reports suggest ~20/min; stay below. A 429 pauses lookups for 5 min.</span></label>
+<input id="maxPerMinute" type="number" min="1" max="20" step="1" />
+
+<label><input id="saveResults" type="checkbox" style="width:auto" /> Save each lookup to the Results ranking <span class="h">(stored only in this browser; delete any time on the Results page)</span></label>
+
+<div><button id="save">Save</button><span id="saved"></span></div>
+<script src="src/core.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

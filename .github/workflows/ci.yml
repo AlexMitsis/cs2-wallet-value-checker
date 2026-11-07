@@ -1,0 +1,23 @@
+name: ci
+on: [push, pull_request]
+permissions: { contents: read }
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22.12.0" }
+      # Unit tests need no dependencies. The live E2E scripts (npm run e2e:*) hit real sites and stay manual.
+      - run: npm test
+      - name: Syntax check
+        run: for f in src/*.js options.js results.js test/*.mjs; do node --check "$f"; done
+      - name: Manifest is valid JSON and references existing files
+        run: |
+          node -e '
+            const fs = require("fs"); const m = JSON.parse(fs.readFileSync("manifest.json", "utf8"));
+            const files = [m.background.service_worker, m.options_ui.page,
+              ...m.content_scripts.flatMap((c) => c.js)];
+            const missing = files.filter((f) => !fs.existsSync(f));
+            if (missing.length) { console.error("missing:", missing); process.exit(1); }
+            console.log("manifest ok:", m.name, m.version);'

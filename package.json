@@ -1,0 +1,19 @@
+{
+  "name": "buff-steam-wallet-value-check",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/core.test.mjs test/background.test.mjs",
+    "e2e:install": "playwright install chromium",
+    "e2e": "node test/e2e.mjs",
+    "e2e:results": "node test/e2e-results.mjs",
+    "e2e:pages": "node test/e2e-pages.mjs",
+    "e2e:anim": "node test/e2e-anim.mjs",
+    "e2e:layout": "node test/e2e-layout.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1"
+  },
+  "license": "MIT",
+  "version": "0.3.0"
+}

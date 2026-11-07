@@ -1,0 +1,11 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+screenshots/
+*.zip
+*.rar
+*.crx
+*.pem
+.DS_Store
+Thumbs.db

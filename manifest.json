@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "BUFF → Steam wallet-value check",
+  "version": "0.3.0",
+  "description": "Hover a BUFF.Market item to compare it with the live Steam Community Market price after Steam fees. Read-only; no trading.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://steamcommunity.com/market/priceoverview/*",
+    "https://www.ecb.europa.eu/stats/eurofxref/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://buff.market/*"
+      ],
+      "js": [
+        "src/core.js",
+        "src/content-buff.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/market/listings/730/*"
+      ],
+      "js": [
+        "src/core.js",
+        "src/content-steam.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "Open results ranking"
+  }
+}

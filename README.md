@@ -1,4 +1,4 @@
-# BUFF → Steam wallet-value check
+# CS2 Wallet-Value Checker
 
 A Chrome extension for CS2 skin traders. Hover an item on **buff.market** and a popup shows the live
 **Steam Community Market** price for the exact same item, Steam's fees, the Steam Wallet credit you'd
@@ -59,6 +59,23 @@ different tabs, so the extension checks which page you're on. Results checked on
 | Any other page | Not checked | Popup with a ⚠ "not verified" warning |
 
 ### Results page
+Every profitable item you hover is collected on one page, so after browsing BUFF.Market you can sort
+everything you've seen by profit and pick the best deals.
+
+![Results page ranking every profitable item you've hovered](docs/images/buff_results.jpg)
+
+**Your results are kept.** They stay when you close the tab, restart the browser or computer, or reload
+or update the extension, so you can browse over several sessions and come back to the ranking. Rows
+only disappear when:
+- you delete them,
+- an item turns unprofitable on a later hover,
+- the 5,000-item limit is reached (the oldest go first), or
+- the extension is removed.
+
+With "Load unpacked", Chrome treats the folder location as part of the extension's identity. Moving
+the folder or loading it from a new place starts with an empty Results page, so use **Export CSV**
+first if you want a copy.
+
 - **What's stored:** only items with a **positive** return. An item that's no longer profitable when
   you hover it again is removed.
 - **Columns:** Item, Links (BUFF – Steam), BUFF cost, Steam ask, 24h sales/median, Sell at → credit,
@@ -70,8 +87,8 @@ different tabs, so the extension checks which page you're on. Results checked on
   thin-liquidity or pattern/phase items.
 - **Deleting:** delete one row, the selected rows, all rows shown, or everything.
 - **Export:** export the rows shown to CSV, with UTC timestamps.
-- **Storage:** stored only in your browser (`chrome.storage.local`), up to 5,000 items. You can turn
-  saving off in the options.
+- **Storage:** stored only in this browser profile (`chrome.storage.local`), not synced to other
+  devices. You can turn saving off in the options.
 
 ## How the numbers are produced
 | Value | How |

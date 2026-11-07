@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "BUFF → Steam wallet-value check",
+  "name": "CS2 Wallet-Value Checker",
   "version": "0.3.0",
   "description": "Hover a BUFF.Market item to compare it with the live Steam Community Market price after Steam fees. Read-only; no trading.",
   "permissions": [

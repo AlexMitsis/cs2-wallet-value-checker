@@ -1,5 +1,5 @@
 {
-  "name": "buff-steam-wallet-value-check",
+  "name": "cs2-wallet-value-checker",
   "private": true,
   "type": "module",
   "scripts": {
